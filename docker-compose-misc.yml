@@ -1,0 +1,49 @@
+version: "3"
+services:
+  mongo:
+    hostname: mongo
+    container_name: mongo
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mypassword
+  mongo-express:
+    hostname: mongo-express
+    container_name: mongo-express
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mypassword
+  redis:
+    hostname: redis
+    container_name: redis
+    image: "redis:alpine"
+    command: ["redis-server", "--requirepass", "mypassword"]
+    ports:
+      - 6379:6379
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      REDIS_HOST: redis
+      REDIS_PASSWORD: mypassword
+    ports:
+    - "8082:8081"
+  rabbit:
+    container_name: rabbit
+    hostname: rabbit
+    image: rabbitmq:3.8.2-management
+    command: []
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
