@@ -21,7 +21,7 @@
     ```
 * Mounting storage
     ```shell
-    docker run --rm -p 80:80 -v "$PWD/html":/var/www/html httpd:alpine
+    docker run --rm -p 80:80 -v "$PWD/html":/usr/local/apache2/htdocs httpd:alpine
     ```
 * Passing environment variables
     ```shell
@@ -41,10 +41,10 @@
     ```
 * Archiving/loading images
     ```shell
-    docker save mynginx:v1.0.0 | gzip -9 > ~/mynginx:v1.0.0.tar.gz
+    docker save mynginx:v1.0.0 | gzip -9 > ~/mynginx-v1.0.0.tar.gz
     docker image rm mynginx:v1.0.0
     docker image ls
-    gunzip -c ~/mynginx:v1.0.0.tar.gz | docker load
+    gunzip -c ~/mynginx-v1.0.0.tar.gz | docker load
     docker image ls
     ```
 * Networks
