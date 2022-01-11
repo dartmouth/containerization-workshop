@@ -3,12 +3,18 @@
 ## Agenda
 
 * Containerization Overview
+  * What is a container? (VM=house, Container=apartment)
+  * Why should you use containers?
+    * Speed
+    * Reproducibility
+  * Docker vs. Containerization (Kleenex vs. Tissue)
+  * Future: Rancher Desktop
 * Running your first container
     ```shell
     docker run docker/whalesay:latest cowsay Hello  # Run docker/whalesay container
     docker ps                                       # Display running containers
     docker ps -a                                    # Display all containers
-    docker rm -f $(docker ps -a -q)                 # Delete all containers
+    docker rm -f $(docker ps -a -q)                 # WARNING: Delete all containers
     docker run --rm docker/whalesay cowsay Hello    # Delete container after running 
     docker run --rm -it ubuntu bash                 # Run an interactive ubuntu container
     ```
@@ -97,3 +103,5 @@
     docker run -it --rm -v $(realpath ~/notebooks):/tf/notebooks -p 8888:8888 tensorflow/tensorflow:latest-jupyter
     docker run -it --rm -v $(realpath ~/rstudio):/home/rstudio/rstudio -p 8787:8787 -e DISABLE_AUTH=true rocker/rstudio
     ```
+* What does the future hold?
+* Questions?
