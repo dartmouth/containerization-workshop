@@ -16,11 +16,15 @@
     docker ps -a                                    # Display all containers
     docker rm -f $(docker ps -a -q)                 # WARNING: Delete all containers
     docker run --rm docker/whalesay cowsay Hello    # Delete container after running 
-    docker run --rm -it ubuntu bash                 # Run an interactive ubuntu container
+    docker run -it ubuntu bash                      # Run an interactive ubuntu container
+    TODO: How to get back into the container
     ```
 * Exposing Ports, Running in Background, and Accessing logs
     ```shell
     docker run --name mynginx -d -p 80:80 --restart unless-stopped nginx:alpine
+    docker stop mynginx
+    docker start mynginx
+    docker restart mynginx
     docker logs -f mynginx
     docker ps
     docker rm -f mynginx
@@ -47,10 +51,10 @@
     ```
 * Archiving/loading images
     ```shell
-    docker save mynginx:v1.0.0 | gzip -9 > ~/mynginx-v1.0.0.tar.gz
+    docker save -o mynginx-v1.0.0 mynginx:v1.0.0
     docker image rm mynginx:v1.0.0
     docker image ls
-    gunzip -c ~/mynginx-v1.0.0.tar.gz | docker load
+    docker load -i mynginx-v1.0.0
     docker image ls
     ```
 * Networks
