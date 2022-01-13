@@ -16,15 +16,15 @@
     docker ps -a                                    # Display all containers
     docker rm -f $(docker ps -a -q)                 # WARNING: Delete all containers
     docker run --rm docker/whalesay cowsay Hello    # Delete container after running 
-    docker run -it ubuntu bash                      # Run an interactive ubuntu container
-    TODO: How to get back into the container
+    docker run --name myubuntu -it ubuntu bash      # Run an interactive ubuntu container
+    docker start myubuntu
+    docker exec -ti myubuntu bash
+    docker stop myubuntu
+    docker rm myubuntu 
     ```
 * Exposing Ports, Running in Background, and Accessing logs
     ```shell
     docker run --name mynginx -d -p 80:80 --restart unless-stopped nginx:alpine
-    docker stop mynginx
-    docker start mynginx
-    docker restart mynginx
     docker logs -f mynginx
     docker ps
     docker rm -f mynginx
