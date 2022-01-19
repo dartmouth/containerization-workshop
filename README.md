@@ -65,30 +65,16 @@
     ```
 * Multiple containers
     ```shell
-    docker run -d \
-      --name todo-mysql \
-      --network todo-app \
-      -v "$PWD/todo-mysql-data":/var/lib/mysql \
-      -e MYSQL_ROOT_PASSWORD=secret \
-      -e MYSQL_DATABASE=todos \
-      mysql:5.7
-    docker exec -it todo-mysql mysql -p
+    docker pull mysql:5.7
+    docker pull node:12-alpine
+    docker run -d --name todo-mysql --network todo-app -v $PWD/todo-mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=todos mysql:5.7
+    docker exec -it todo-mysql mysql -p # Password: secret
       SHOW DATABASES;
     docker run --rm -it --network todo-app alpine
       apk update
       apk add bind-tools
       dig todo-mysql
-    docker run -d \
-      --name todo-app \
-      -p 3000:3000 \
-      -w /app -v "$PWD/app":/app \
-      --network todo-app \
-      -e MYSQL_HOST=todo-mysql \
-      -e MYSQL_USER=root \
-      -e MYSQL_PASSWORD=secret \
-      -e MYSQL_DB=todos \
-      node:12-alpine \
-      sh -c "yarn install && yarn run dev"
+    docker run -d --name todo-app -p 3000:3000 -w /app -v $PWD/app:/app --network todo-app -e MYSQL_HOST=todo-mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=secret -e MYSQL_DB=todos node:12-alpine sh -c "yarn install && yarn run dev"
     # Goto: http://localhost:3000/
     docker exec -it todo-mysql mysql -p
     docker rm -f todo-app todo-mysql
@@ -108,8 +94,8 @@
     ```shell
     docker pull tensorflow/tensorflow:latest-jupyter
     docker pull rocker/rstudio
-    docker run -it --rm -v $(realpath ~/notebooks):/tf/notebooks -p 8888:8888 tensorflow/tensorflow:latest-jupyter
-    docker run -it --rm -v $(realpath ~/rstudio):/home/rstudio/rstudio -p 8787:8787 -e DISABLE_AUTH=true rocker/rstudio
+    docker run -it --rm -v $PWD/notebooks:/tf/notebooks -p 8888:8888 tensorflow/tensorflow:latest-jupyter
+    docker run -it --rm -v $PWD/rstudio:/home/rstudio/rstudio -p 8787:8787 -e DISABLE_AUTH=true rocker/rstudio
     ```
 * What does the future hold?
 * Questions?
