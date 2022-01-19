@@ -31,11 +31,11 @@
     ```
 * Mounting storage
     ```shell
-    docker run --rm -p 80:80 -v "$PWD/html":/usr/local/apache2/htdocs httpd:alpine
+    docker run --rm -p 80:80 -v $PWD/html:/usr/local/apache2/htdocs httpd:alpine
     ```
 * Passing environment variables
     ```shell
-    docker run --rm -p 80:80 -v "$PWD/html":/var/www/html -e MYVAR=hello php:7-apache
+    docker run --rm -p 80:80 -v $PWD/html:/var/www/html -e MYVAR=hello php:7-apache
     ```
 * Finding container images: [Docker Hub](https://hub.docker.com)
     ```shell
