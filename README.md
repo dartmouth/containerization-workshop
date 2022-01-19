@@ -45,6 +45,7 @@
     ```
 * Building docker images
     ```shell
+    echo 'Hello World!' > html/index.html
     docker build -t mynginx:v1.0.0 .
     docker image ls
     docker run --rm -it -p 80:80 mynginx:v1.0.0
@@ -88,6 +89,7 @@
       -e MYSQL_DB=todos \
       node:12-alpine \
       sh -c "yarn install && yarn run dev"
+    # Goto: http://localhost:3000/
     docker exec -it todo-mysql mysql -p
     docker rm -f todo-app todo-mysql
     docker network rm todo-app
@@ -104,6 +106,8 @@
     ```
 * Research containers
     ```shell
+    docker pull tensorflow/tensorflow:latest-jupyter
+    docker pull rocker/rstudio
     docker run -it --rm -v $(realpath ~/notebooks):/tf/notebooks -p 8888:8888 tensorflow/tensorflow:latest-jupyter
     docker run -it --rm -v $(realpath ~/rstudio):/home/rstudio/rstudio -p 8787:8787 -e DISABLE_AUTH=true rocker/rstudio
     ```
