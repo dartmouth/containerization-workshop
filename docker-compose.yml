@@ -11,7 +11,7 @@ services:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: todos
     volumes:
-      -  ${PWD}/todo-mysql-data:/var/lib/mysql
+      -  ./todo-mysql-data:/var/lib/mysql
   todo-app:
     hostname: todo-app
     container_name: todo-app
@@ -26,5 +26,5 @@ services:
       MYSQL_PASSWORD: secret
       MYSQL_DB: todos
     volumes:
-      - ${PWD}/app:/app
+      - ./app:/app
     working_dir: /app
